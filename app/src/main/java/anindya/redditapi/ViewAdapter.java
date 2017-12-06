@@ -1,6 +1,7 @@
 package anindya.redditapi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,10 +47,9 @@ class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-//                    Intent intent = new Intent(context, ItemDetailActivity.class);
-//                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.getProductId());
-
-                // context.startActivity(intent);
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra(CommentActivity.ARG_ITEM_ID, holder.mItem.data.id);
+                context.startActivity(intent);
 
             }
         });
