@@ -7,12 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class SubRedData {
 
-//    @SerializedName("modhash")
-//    @Expose
-//    public String modhash;
-//    @SerializedName("whitelist_status")
-//    @Expose
-//    public String whitelistStatus;
     @SerializedName("children")
     @Expose
     public List<Child> children = null;

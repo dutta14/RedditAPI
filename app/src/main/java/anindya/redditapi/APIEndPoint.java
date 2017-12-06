@@ -11,10 +11,13 @@ import retrofit2.http.Query;
  */
 
 public interface APIEndPoint {
-    // Request method and URL specified in the annotation
-    // Callback for the parsed response is the last parameter
 
     @GET("r/{subreddit}/hot/.json")
-    Call<Result> getHot(@Path("subreddit") String subreddit);
+    Call<Result> getHot(@Path("subreddit") String subreddit, @Query("limit") int limit);
 
+    @GET("r/{subreddit}/hot/.json")
+    Call<Result> getHotAfter(@Path("subreddit") String subreddit, @Query("after") String next, @Query("limit") int limit);
+
+    @GET("r/{subreddit}/hot/.json")
+    Call<Result> getHotBefore(@Path("subreddit") String subreddit, @Query("before") String next, @Query("limit") int limit);
 }
