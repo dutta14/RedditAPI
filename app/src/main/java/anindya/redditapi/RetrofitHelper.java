@@ -18,10 +18,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitHelper {
 
     private static final String BASE_URL = "http://www.reddit.com/";
+    private static final int LIMIT = 10;
     public static final String DOWNLOAD_COMPLETE = "download_complete";
     private APIEndPoint mEndPoint;
-    private Result mResult;
+    private  Result mResult;
     private Context mContext;
+
+    public enum Options {HOT, NEW, RISING, RANDOM}
 
     public RetrofitHelper(Context context) {
         Retrofit mRetrofit = new Retrofit.Builder()
@@ -33,10 +36,15 @@ public class RetrofitHelper {
         mContext = context;
     }
 
-   public void dowloadHot(String subreddit) {
-       Call<Result> call = mEndPoint.getHot(subreddit);
-       enqueueCall(call);
+   public void download(String subreddit) {
+        Call<Result> call =  mEndPoint.getHot(subreddit, LIMIT);
+        enqueueCall(call);
    }
+
+    public void download(String subreddit, String query, boolean after) {
+        Call<Result> call =  after? mEndPoint.getHotAfter(subreddit, query, LIMIT) : mEndPoint.getHotBefore(subreddit, query, LIMIT);
+        enqueueCall(call);
+    }
 
     private void enqueueCall(Call<Result> call) {
         call.enqueue(new Callback<Result>() {

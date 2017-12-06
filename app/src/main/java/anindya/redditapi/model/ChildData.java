@@ -106,9 +106,9 @@ public class ChildData {
     @SerializedName("subreddit_id")
     @Expose
     public String subredditId;
-    @SerializedName("edited")
-    @Expose
-    public boolean edited;
+//    @SerializedName("edited")
+//    @Expose
+//    public boolean edited;
     @SerializedName("link_flair_css_class")
     @Expose
     public Object linkFlairCssClass;

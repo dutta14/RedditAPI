@@ -12,33 +12,25 @@ import java.util.ArrayList;
  */
 
 public class SectionAdapter extends FragmentPagerAdapter {
-    private final int[] headings = {R.string.hot, R.string.news, R.string.rising, R.string.random};
-    private ArrayList<ListFragment> mFragments;
-    private int mTotalFrags;
     private Context mContext;
 
     public SectionAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
-        mTotalFrags = 4;
-        mFragments = new ArrayList<>();
-        for(int i=0; i<mTotalFrags; i++) {
-            mFragments.add(ListFragment.newInstance(i+1));
-        }
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        return ListFragment.newInstance(RetrofitHelper.Options.HOT, new RetrofitHelper(mContext));
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 1;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getString(headings[position]);
+        return mContext.getString(R.string.hot);
     }
 }
