@@ -100,6 +100,7 @@ public class ListFragment extends Fragment {
             try {
                 LResult temp = ((Home)getActivity()).getHelper().getResult();
                 if(temp.data.children.size() > 0) {
+                    getActivity().setTitle(mHelper.getSubReddit());
                     mResult = temp;
                     mItemList = mResult.data.children;
                     setupRecyclerView();

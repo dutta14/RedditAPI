@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/Buttons"
             android:text="@string/prev"/>
 
         <Button
@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/Buttons"
             android:text="@string/next"/>
 
     </LinearLayout>

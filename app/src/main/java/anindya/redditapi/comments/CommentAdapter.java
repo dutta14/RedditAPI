@@ -2,6 +2,7 @@ package anindya.redditapi.comments;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(holder.mItem.data.body);
+        if(holder.mItem.data.body != null)
+            holder.mContentView.setText(Html.fromHtml(holder.mItem.data.body));
     }
 
     @Override

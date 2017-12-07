@@ -85,6 +85,7 @@ public class RetrofitHelper {
             public void onResponse(Call<LResult> call, Response<LResult> response) {
                 if(response.body() != null) {
                     mResult = response.body();
+                    prevSubReddit = mSubreddit;
                 } else {
                     mSubreddit = prevSubReddit;
                     Toast.makeText(mContext, "No results for this search term!", Toast.LENGTH_SHORT).show();
@@ -105,5 +106,9 @@ public class RetrofitHelper {
 
     public CResult getComments() {
         return mComments;
+    }
+
+    public String getSubReddit() {
+        return prevSubReddit;
     }
 }

@@ -10,6 +10,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import anindya.redditapi.R;
 import anindya.redditapi.RetrofitHelper;
@@ -52,8 +54,14 @@ public class CommentActivity extends AppCompatActivity {
 
             RecyclerView itemList = findViewById(R.id.comment_list);
             itemList.setItemAnimator(new DefaultItemAnimator());
-            itemList.setAdapter(new CommentAdapter(mResults.data.children, mContext));
-            Log.e("anindya", ""+mResults.data.children.size());
+            TextView noComments = findViewById(R.id.no_comments);
+            if(mResults.data != null) {
+                itemList.setAdapter(new CommentAdapter(mResults.data.children, mContext));
+                Log.e("anindya", "" + mResults.data.children.size());
+                noComments.setVisibility(mResults.data.children.size() == 0 ? View.VISIBLE : View.GONE);
+            } else {
+                noComments.setVisibility(View.VISIBLE);
+            }
         }
     };
 
