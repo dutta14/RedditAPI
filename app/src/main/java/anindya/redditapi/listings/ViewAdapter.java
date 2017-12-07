@@ -44,7 +44,7 @@ class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(holder.mItem.data.title);
-        if(!holder.mItem.data.thumbnail.isEmpty()) {
+        if(isValidImageUrl(holder.mItem.data.thumbnail)) {
             Picasso.with(mContext).load(holder.mItem.data.thumbnail).into(holder.mThumbnailView);
         }
 
@@ -58,6 +58,10 @@ class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
             }
         });
+    }
+
+    private boolean isValidImageUrl(String thumbnail) {
+       return  thumbnail != null && !thumbnail.isEmpty() && thumbnail.startsWith("http");
     }
 
     @Override
