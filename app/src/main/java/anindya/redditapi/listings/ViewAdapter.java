@@ -1,4 +1,4 @@
-package anindya.redditapi;
+package anindya.redditapi.listings;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,18 +13,21 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import anindya.redditapi.model.Child;
+import anindya.redditapi.comments.CommentActivity;
+import anindya.redditapi.R;
+import anindya.redditapi.listings.model.LChild;
 
 /**
- * Created by anind on 12/6/2017.
+ * View adapter for each item in home screen.
+ * @author Anindya
  */
 
 class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
-    private final List<Child> mValues;
-    Context mContext;
+    private final List<LChild> mValues;
+    private Context mContext;
 
-    ViewAdapter(List<Child> items, Context context) {
+    ViewAdapter(List<LChild> items, Context context) {
         mValues = items;
         mContext = context;
     }
@@ -41,14 +44,16 @@ class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(holder.mItem.data.title);
-        Picasso.with(mContext).load(holder.mItem.data.thumbnail).into(holder.mThumbnailView);
+        if(!holder.mItem.data.thumbnail.isEmpty()) {
+            Picasso.with(mContext).load(holder.mItem.data.thumbnail).into(holder.mThumbnailView);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra(CommentActivity.ARG_ITEM_ID, holder.mItem.data.id);
+                intent.putExtra(CommentActivity.LISTING_ID, holder.mItem.data.id);
                 context.startActivity(intent);
 
             }
@@ -64,9 +69,9 @@ class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
         private final View mView;
         private final ImageView mThumbnailView;
         private final TextView mContentView;
-        private Child mItem;
+        private LChild mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mThumbnailView = view.findViewById(R.id.thumbnail);

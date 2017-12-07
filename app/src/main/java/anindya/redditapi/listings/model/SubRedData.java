@@ -1,5 +1,5 @@
 
-package anindya.redditapi.model;
+package anindya.redditapi.listings.model;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -9,7 +9,7 @@ public class SubRedData {
 
     @SerializedName("children")
     @Expose
-    public List<Child> children = null;
+    public List<LChild> children = null;
     @SerializedName("after")
     @Expose
     public String after;

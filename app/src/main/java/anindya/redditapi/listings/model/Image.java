@@ -1,12 +1,13 @@
 
-package anindya.redditapi.model;
+package anindya.redditapi.listings.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
-    @SerializedName("data")
+public class Image {
+
+    @SerializedName("id")
     @Expose
-    public SubRedData data;
+    public String id;
 
 }

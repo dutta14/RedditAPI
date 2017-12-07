@@ -1,12 +1,9 @@
-package anindya.redditapi;
+package anindya.redditapi.listings;
 
 import android.app.SearchManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -15,17 +12,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import anindya.redditapi.model.Result;
+import anindya.redditapi.R;
+import anindya.redditapi.RetrofitHelper;
 
+/**
+ * Home/Main activity.
+ * Shows results for  "android" subreddit by default.
+ * @author Anindya
+ */
 public class Home extends AppCompatActivity {
 
-    private SectionAdapter mSectionAdapter;
-    private ViewPager mViewPager;
-
-    private Context mContext;
     private RetrofitHelper mRetroHelper;
-
     private String mQuery = "android";
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +33,15 @@ public class Home extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mContext = getApplicationContext();
-        mViewPager = findViewById(R.id.viewpager);
+        Context context = getApplicationContext();
+        ViewPager mViewPager = findViewById(R.id.viewpager);
 
-        mRetroHelper = new RetrofitHelper(mContext);
+        mRetroHelper = new RetrofitHelper(context);
 
-        mSectionAdapter = new SectionAdapter(getSupportFragmentManager(), mContext);
+        SectionAdapter mSectionAdapter = new SectionAdapter(getSupportFragmentManager(), context);
         mViewPager.setAdapter(mSectionAdapter);
         handleIntent(getIntent());
         mRetroHelper.download(mQuery);
-
     }
 
     @Override
@@ -53,6 +51,8 @@ public class Home extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            searchView.setQuery("", false);
+            searchView.setIconified(true);
             mQuery = intent.getStringExtra(SearchManager.QUERY);
             Log.e("anindya", mQuery);
             mRetroHelper.download(mQuery);
@@ -71,9 +71,8 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
 
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo( searchManager.getSearchableInfo(getComponentName()));
 
         return true;

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home"
+            android:name=".listings.Home"
             android:label="@string/title_activity_home"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,13 +30,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CommentActivity"
+            android:name=".comments.CommentActivity"
             android:label="@string/title_activity_comment"
-            android:parentActivityName=".Home"
+            android:parentActivityName=".listings.Home"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="anindya.redditapi.Home" />
+                android:value="anindya.redditapi.listings.Home" />
         </activity>
     </application>
 

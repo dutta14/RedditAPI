@@ -1,23 +1,30 @@
 package anindya.redditapi;
 
-import anindya.redditapi.model.Result;
+import java.util.List;
+
+import anindya.redditapi.comments.model.CResult;
+import anindya.redditapi.listings.model.LResult;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * Created by anind on 12/5/2017.
+ * API End-points for subreddits and comments.
+ * @author Anindya
  */
 
 public interface APIEndPoint {
 
     @GET("r/{subreddit}/hot/.json")
-    Call<Result> getHot(@Path("subreddit") String subreddit, @Query("limit") int limit);
+    Call<LResult> getHot(@Path("subreddit") String subreddit, @Query("limit") int limit);
 
     @GET("r/{subreddit}/hot/.json")
-    Call<Result> getHotAfter(@Path("subreddit") String subreddit, @Query("after") String next, @Query("limit") int limit);
+    Call<LResult> getHotAfter(@Path("subreddit") String subreddit, @Query("after") String next, @Query("limit") int limit);
 
     @GET("r/{subreddit}/hot/.json")
-    Call<Result> getHotBefore(@Path("subreddit") String subreddit, @Query("before") String next, @Query("limit") int limit);
+    Call<LResult> getHotBefore(@Path("subreddit") String subreddit, @Query("before") String next, @Query("limit") int limit);
+
+    @GET("r/{subreddit}/comments/{article}/.json")
+    Call<List<CResult>> getComments(@Path("subreddit") String subreddit, @Path("article") String article);
 }
