@@ -1,12 +1,12 @@
 
-package anindya.redditapi.model;
+package anindya.redditapi.listings.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Child {
+public class LResult {
     @SerializedName("data")
     @Expose
-    public ChildData data;
+    public SubRedData data;
 
 }

@@ -15,7 +15,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="anindya.redditapi.Home"
+    tools:context="anindya.redditapi.listings.Home"
     tools:listitem="@layout/item_list_content" />
 
 

@@ -1,14 +1,17 @@
-package anindya.redditapi;
+package anindya.redditapi.listings;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
+import anindya.redditapi.R;
+import anindya.redditapi.RetrofitHelper;
 
 /**
- * Created by anind on 12/6/2017.
+ * Adapter for the fragments. Currently has only one fragment for HOT.
+ * Can be extended to multiple categories.
+ * @author Anindya
  */
 
 public class SectionAdapter extends FragmentPagerAdapter {
@@ -21,7 +24,7 @@ public class SectionAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ListFragment.newInstance(RetrofitHelper.Options.HOT, new RetrofitHelper(mContext));
+        return ListFragment.newInstance(RetrofitHelper.Options.HOT);
     }
 
     @Override
